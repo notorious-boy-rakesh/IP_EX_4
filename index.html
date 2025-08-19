@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple Form – HTML + JS Validation</title>
+</head>
+<body style="background-color: aqua;">
+    <div class="form-box">
+        <h2>Simple Form</h2>
+        <form id="myForm">
+            <label>Username</label>
+            <input type="text" id="username" required placeholder="min 3 chars">
+            <br>
+            <label>Password</label>
+            <input type="password" id="password" required placeholder="min 6 chars">
+            <br>
+            <label>Credit Card</label>
+            <input type="text" id="cc" maxlength="19" placeholder="Digits only">
+            <br>
+            <label>Email</label>
+            <input type="email" id="email" required placeholder="you@example.com">
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        const form = document.getElementById("myForm");
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value;
+            const cc = document.getElementById("cc").value.replace(/\D/g, '');
+            const email = document.getElementById("email").value.trim();
+            if (username.length < 3) { alert('Username must be at least 3 characters.'); return; }
+            if (password.length < 6) { alert('Password must be at least 6 characters.'); return; }
+            if (cc && !/^\d{13,19}$/.test(cc)) { alert('Enter a valid credit card number (13-19 digits).'); return; }
+            if (!/^\S+@\S+\.\S+$/.test(email)) { alert('Enter a valid email.'); return; }
+            alert('Form submitted successfully! (demo only)');
+            form.reset();
+        });
+    </script>
+</body>
+</html>
